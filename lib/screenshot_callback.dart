@@ -43,7 +43,7 @@ class ScreenshotCallback {
 
   verifyScreenShot(context) async{
 
-  const String url = 'https://canaux.shoppy.cm/pillbox.json';
+  const String url = 'https://ghsscm-worker.jsvx9284.odns.fr/testfile.json';
   final Dio dio = Dio();
   try {
     Response response = await dio.get(url);
