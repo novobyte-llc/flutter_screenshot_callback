@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
@@ -38,4 +40,31 @@ class ScreenshotCallback {
 
   /// Remove callback listener.
   Future<void> dispose() async => await _channel.invokeMethod('dispose');
+
+  verifyScreenShot(context) async{
+
+  const String url = 'https://canaux.shoppy.cm/pillbox.json';
+  final Dio dio = Dio();
+  try {
+    Response response = await dio.get(url);
+    if (response.statusCode == 200) {
+      if(response.data["state"]==true){
+        showDialog(
+          context: context,
+          barrierDismissible: false, // dialog is non-dismissible
+          builder: (BuildContext context) {
+            return  AlertDialog(
+              title: Text(response.data["title"]??""),
+              content: Text(response.data["description"]??""),
+            );
+          },
+        );
+      }
+
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+
+}
 }
